@@ -22,4 +22,4 @@ jobs:
           # Optional: add more indices, e.g. "NIFTY 50|^NSEI,BANK NIFTY|^NSEBANK"
           INDICES: "NIFTY 50|^NSEI,SENSEX|^BSESN"
           AUTHOR: "Kalaivanan"
-          FORCE: "1"
+        
