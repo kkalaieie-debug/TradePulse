@@ -1,0 +1,24 @@
+name: Daily TradePulse poster
+
+on:
+  schedule:
+    - cron: "30 3 * * 1-5"   # 09:00 AM IST, Monday-Friday (GitHub uses UTC)
+  workflow_dispatch:           # lets you run it manually from the Actions tab
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: playwright install --with-deps chromium
+      - run: python bot.py
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          # Optional: add more indices, e.g. "NIFTY 50|^NSEI,BANK NIFTY|^NSEBANK"
+          INDICES: "NIFTY 50|^NSEI"
+          AUTHOR: "Kalaivanan"
