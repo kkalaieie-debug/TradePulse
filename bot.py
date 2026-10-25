@@ -59,7 +59,7 @@ def build_periods(rows, today):
 
     # previous trading day
     d = past[-1]
-    daily = dict(k="D", t="DAILY RANGE", s=f"{d[0].day} {d[0]:%B %Y}",
+    daily = dict(k="D", t="DAILY RANGE", s=f"{today.day} {today:%B %Y}",
                  p="Previous day", H=d[1], L=d[2], C=d[3], u="day")
 
     # previous completed week (Mon-Fri before this week's Monday)
@@ -67,7 +67,7 @@ def build_periods(rows, today):
     wk_rows = [r for r in rows if r[0] < monday]
     last_wk = wk_rows[-1][0].isocalendar()[:2]
     wk = [r for r in wk_rows if r[0].isocalendar()[:2] == last_wk]
-    a, b = wk[0][0], wk[-1][0]
+    a, b = monday, monday + timedelta(days=4)   # this week, Mon-Fri
     lbl = (f"{a.day}-{b.day} {b:%b %Y}" if a.month == b.month
            else f"{a.day} {a:%b} - {b.day} {b:%b %Y}")
     H, L, C = hlc(wk)
@@ -80,7 +80,7 @@ def build_periods(rows, today):
     ym = (mo_rows[-1][0].year, mo_rows[-1][0].month)
     mo = [r for r in mo_rows if (r[0].year, r[0].month) == ym]
     H, L, C = hlc(mo)
-    monthly = dict(k="M", t="MONTHLY RANGE", s=f"{mo[-1][0]:%B %Y}",
+    monthly = dict(k="M", t="MONTHLY RANGE", s=f"{today:%B %Y}",
                    p="Previous month", H=H, L=L, C=C, u="month")
 
     return [monthly, weekly, daily]
