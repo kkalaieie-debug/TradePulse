@@ -20,6 +20,6 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           # Optional: add more indices, e.g. "NIFTY 50|^NSEI,BANK NIFTY|^NSEBANK"
-          INDICES: "NIFTY 50|^NSEI"
+          INDICES: "NIFTY 50|^NSEI,SENSEX|^BSESN"
           AUTHOR: "Kalaivanan"
           FORCE: "1"
