@@ -2,7 +2,7 @@ name: Daily TradePulse poster
 
 on:
   schedule:
-    - cron: "30 3 * * 1-5"   # 09:00 AM IST, Monday-Friday (GitHub uses UTC)
+    - cron: "15 3 * * 1-5"   # 08:45 AM IST, Monday-Friday (GitHub uses UTC)
   workflow_dispatch:           # lets you run it manually from the Actions tab
 
 jobs:
